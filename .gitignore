@@ -1,0 +1,20 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Dependencias (cuando haya app)
+node_modules/
+dist/
+build/
+*.log
+
+# Secretos
+.env
+.env.*
+!.env.example
+
+# Nota: skills-library/ SÍ se incluye en el repo a propósito.

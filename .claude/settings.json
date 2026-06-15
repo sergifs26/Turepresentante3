@@ -1,0 +1,7 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\sergi\\OneDrive\\Documentos\\tu representante 3\\skills-library\\statusline-skills.ps1\"",
+    "padding": 0
+  }
+}
