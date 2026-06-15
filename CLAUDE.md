@@ -79,6 +79,32 @@ Tras activar/desactivar, **recargar Claude Code** para que detecte los cambios.
 activas y el total disponible (ej. `Activas 3/138: design, brand, ...`). La alimenta
 `skills-library/statusline-skills.ps1`, que lee `.claude/skills/`.
 
+## Backend / ramas y despliegue
+
+Flujo de **dos ramas** (no es un fork; son ramas del mismo repo):
+
+| Rama | Rol | Hospedaje |
+|------|-----|-----------|
+| `main` | Producción (web en vivo) | Cloudflare Pages |
+| `staging` | Pruebas de cambios | Vercel |
+
+**Regla:** nunca se hace push directo a `main`. Los cambios se prueban en `staging`
+(Vercel) y, bajo supervisión, se promueven a `main` (Cloudflare):
+
+```
+git checkout staging        # trabajar siempre aquí
+# ...cambios...
+git add -A && git commit -m "..." && git push   # Vercel despliega staging
+
+# cuando esté validado:
+git checkout main
+git merge staging
+git push                     # Cloudflare despliega produccion
+```
+
+- Cloudflare: Production branch = `main`.
+- Vercel: Settings > Git > Production Branch = `staging`.
+
 ## Convenciones del entorno
 - SO: Windows 11. Shell principal: PowerShell (5.1).
 - Los scripts `.ps1` deben evitar caracteres no-ASCII (PS 5.1 los malinterpreta sin BOM).
